@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     .required('Ingrese su contraseña')
     .min(8,'La contraseña debe tener al menos 8 caracteres')
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&."/-_])[A-Za-z\d@$!%*#?&."/-_]{8,}$/,
       "Su contraseña no cumple con los requerimientos"
     ),
     validate_new_password: Yup.string()
