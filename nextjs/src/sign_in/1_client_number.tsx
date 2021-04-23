@@ -37,6 +37,12 @@ const useStyles = makeStyles((theme: Theme) =>
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    helperText: {
+      fontSize:'x-small',
+      margin: 0,
+      padding:0,
+      height:0
+    }
   }));
 
 
@@ -126,14 +132,7 @@ export default function Client_number ({formSchema: formSchema, handleNext:handl
             label="N° Cliente"
             name="new_client_no"
             autoFocus
-            FormHelperTextProps ={{
-              style: {
-                fontSize:'x-small',
-                margin: 0,
-                padding:0,
-                height:0
-              },
-            }}
+            FormHelperTextProps={{className:classes.helperText}}
             InputProps={{
               inputComponent: NumberFormatCustom
                 }}

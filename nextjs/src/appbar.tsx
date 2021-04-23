@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0
     },
     appbar:{
-      height:'45px'
+      height: theme.spacing(6),
     },
     icon:{
       paddingTop:0,

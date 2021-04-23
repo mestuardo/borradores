@@ -1,3 +1,4 @@
+  
 import React from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -71,10 +72,6 @@ export default function SignIn() {
 
   },[activeStep])
 
-  const handleLogin = () => {
-    setLogin(true)
-    return <div>Inicio sesión</div>
-  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

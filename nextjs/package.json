@@ -3,9 +3,12 @@
   "version": "4.0.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "v1",
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/pickers": "latest",
     "clsx": "latest",
+    "date-fns": "latest",
     "formik": "^2.2.6",
     "next": "latest",
     "prop-types": "latest",
