@@ -39,6 +39,9 @@ function Copyright() {
   );
 }
 
+
+
+// Labels títulos y largo de pasos
 const steps = ['Información del cliente', 
 'Informacion del perfil requerido', 
 'Información de contratación del colaborador',
@@ -148,11 +151,11 @@ export default function SignIn() {
 
  
 
-  React.useEffect(() => {
-    return () => {
-      form_2.current = false
-    }
-}, []) 
+//   React.useEffect(() => {
+//     return () => {
+//       form_2.current = false
+//     }
+// }, []) 
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

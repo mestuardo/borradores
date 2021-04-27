@@ -17,6 +17,8 @@ import PropTypes from 'prop-types';
 import { Formik,Form } from 'formik';
 import * as Yup from 'yup';
 
+
+// Estilos inline
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
@@ -46,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }));
 
 
+  // Esquema de validación 
   const SignupSchema = Yup.object().shape({
     new_client_no: Yup.string()
     .required('Ingrese su número de cliente')
@@ -55,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
   
   });
 
-
+// Dejas solo meter números
   function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
   
@@ -71,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
             },
           });
         }}
-        
+   
         isNumericString
         prefix=""
       />
@@ -122,16 +125,22 @@ export default function Client_number ({formSchema: formSchema, handleNext:handl
           <TextField
             variant="outlined"
             margin="normal"
+            
             value ={props.values.new_client_no}
             onChange = {props.handleChange}
             onBlur = {props.handleBlur}
+            
             fullWidth
+            
             helperText={props.touched.new_client_no ? props.errors.new_client_no : ""}
             error={props.touched.new_client_no && Boolean(props.errors.new_client_no)}
+            
             id="new_client_no"
             label="N° Cliente"
             name="new_client_no"
             autoFocus
+
+            
             FormHelperTextProps={{className:classes.helperText}}
             InputProps={{
               inputComponent: NumberFormatCustom

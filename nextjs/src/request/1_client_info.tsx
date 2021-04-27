@@ -22,6 +22,8 @@ import {
 } from '@material-ui/pickers';
 import esLocale from "date-fns/locale/es";
 
+
+// Esquema de validación de campos
 const SignupSchema = Yup.object().shape({
     client: Yup.string()
     .required('Ingrese al cliente'),
@@ -31,12 +33,11 @@ const SignupSchema = Yup.object().shape({
     .required('Ingrese al responsable'),
     client_adress: Yup.string()
     .required('Ingrese la dirección del cliente')
-  
-  
-  
+    
   
   });
 
+  // Estilos inline
   const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     formControl: {
@@ -62,6 +63,7 @@ const SignupSchema = Yup.object().shape({
   }),
 );
 
+// Dejar solo inpuit números
   function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
   
@@ -103,7 +105,7 @@ export default function client_info({formRef:formRef,form1_isMounted:form1_isMou
     return(<React.Fragment>   
         <Typography>Información del cliente</Typography>
           <Formik
-          innerRef={formRef}
+      innerRef={formRef}
        initialValues={formSchema}
        validationSchema={SignupSchema}
        initialTouched={{ 
@@ -135,7 +137,7 @@ export default function client_info({formRef:formRef,form1_isMounted:form1_isMou
 
           format="dd/MM/yyyy"
           value={props.values.request_date}
-          onChange={props.handleChange}
+          onChange={(value) => props.setFieldValue("request_date",value)}
           KeyboardButtonProps={{
             'aria-label': 'cambiar fecha',
           }}

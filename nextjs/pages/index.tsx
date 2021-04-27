@@ -18,6 +18,7 @@ import Client_number from '../src/sign_in/1_client_number'
 import Set_password from '../src/sign_in/2_set_password'
 import Sign_in from '../src/sign_in/3_sign_in'
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -65,6 +66,7 @@ export default function SignIn() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [login, setLogin] = React.useState(false);
 
+  // Si el paso es el último, hacer login
   React.useEffect(()=> {
     if (activeStep === steps.length){
       setLogin(true)
@@ -72,7 +74,7 @@ export default function SignIn() {
 
   },[activeStep])
 
-
+//  Manejador de pasos del form
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };

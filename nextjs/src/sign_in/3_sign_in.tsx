@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     .required('Ingrese su número de cliente')
     .min(5,'El número debe tener 5 dígitos ')
     .max(5,'El número debe tener 5 dígitos '),
-    password: Yup.string()
+    client_password: Yup.string()
     .required('Ingrese su contraseña')
   
   });
@@ -141,15 +141,15 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
             margin="normal"
             
             fullWidth
-            value= {props.values.password}
+            value= {props.values.client_password}
             onChange={props.handleChange}
             // onBlur={props.handleBlur}
-            helperText={props.touched.password ? props.errors.password : ""}
-            error={props.touched.password && Boolean(props.errors.password)}
-            name="password"
+            helperText={props.touched.client_password ? props.errors.client_password : ""}
+            error={props.touched.client_password && Boolean(props.errors.client_password)}
+            name="client_password"
             label="Contraseña"
             type="password"
-            id="password"
+            id="client_password"
             FormHelperTextProps ={{
               style: {
                 fontSize:'x-small',
