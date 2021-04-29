@@ -249,13 +249,5 @@ export default function client_info({formRef:formRef,form1_isMounted:form1_isMou
               </Formik>
         </React.Fragment>
 
-
-
-
-
-
-    
     )
-
-
 }
