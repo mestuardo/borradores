@@ -115,7 +115,7 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
            
            formSchema['client_no'] = values['client_no']
            formSchema['client_password'] = values['client_password']
-           alert(JSON.stringify(values, null, 2));
+          //  alert(JSON.stringify(values, null, 2));
            handleNext()
 
        }}
