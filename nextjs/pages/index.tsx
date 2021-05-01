@@ -10,13 +10,14 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
+
 
 import Appbar from '../src/appbar'
 
 import Client_number from '../src/sign_in/1_client_number'
 import Set_password from '../src/sign_in/2_set_password'
 import Sign_in from '../src/sign_in/3_sign_in'
+import External_client_view from '../src/views/external_client'
 
 
 function Copyright() {
@@ -36,22 +37,6 @@ const steps = ['Client Number', 'Set new password', 'Sign in'];
 
 
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    marginTop: theme.spacing(7),
-  },
-  paper: {
-    margin: theme.spacing(4),
-    height: '424px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign:'center'
-  },
-}));
-
-
-
 var formSchema ={
   new_client_no:'',
   new_password:'',
@@ -62,8 +47,8 @@ var formSchema ={
 
 
 export default function SignIn() {
-  const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+
+  const [activeStep, setActiveStep] = React.useState(2);
   const [login, setLogin] = React.useState(false);
 
   // Si el paso es el último, hacer login
@@ -100,17 +85,15 @@ export default function SignIn() {
   return (
     <React.Fragment>
     <Appbar login={login}/>
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth={activeStep==steps.length ? 'lg' :"xs"}>
       
       <CssBaseline />
       
-      <Card className={classes.card} raised={true}>
-      <div className={classes.paper}>
+
       {activeStep === steps.length ? (
-        <div> incio sesión </div>
+        <External_client_view/>
       ) :  getStepContent(activeStep)}
-      </div>
-      </Card>
+
       <Box mt={3}>
         <Copyright />
       </Box>
