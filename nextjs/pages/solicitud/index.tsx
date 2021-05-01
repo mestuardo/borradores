@@ -179,10 +179,8 @@ export default function SignIn() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return (<React.Fragment>
-        <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>
-          
-          </React.Fragment>);
+        return (
+        <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>);
       case 1:
         return <Required_profile_info formRef={form_2} form2_isMounted={form2_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 2:

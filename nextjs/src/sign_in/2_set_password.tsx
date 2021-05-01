@@ -11,12 +11,23 @@ import Box from '@material-ui/core/Box';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme  } from '@material-ui/core/styles';
-
+import Card from '@material-ui/core/Card';
 import { Formik,Form } from 'formik';
 import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    card: {
+      marginTop: theme.spacing(7),
+    },
+    paper: {
+      margin: theme.spacing(4),
+      height: '424px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign:'center'
+    },
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
@@ -50,8 +61,9 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Set_password ({formSchema: formSchema, handleNext:handleNext}){
     const classes = useStyles();
     return (  
-    
-        <React.Fragment>
+
+          <Card className={classes.card} raised={true}>
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <VpnKeyIcon />
         </Avatar>
@@ -142,7 +154,9 @@ export default function Set_password ({formSchema: formSchema, handleNext:handle
               </Form>
          )}
           </Formik>
-          </React.Fragment>
+          </div>
+      </Card>
+         
             
             )
 }

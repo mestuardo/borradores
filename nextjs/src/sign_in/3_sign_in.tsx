@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box';
 import FaceIcon from '@material-ui/icons/Face';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-
+import Card from '@material-ui/core/Card';
 
 import NumberFormat from 'react-number-format';
 import PropTypes from 'prop-types';
@@ -22,6 +22,17 @@ import * as Yup from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    card: {
+      marginTop: theme.spacing(7),
+    },
+    paper: {
+      margin: theme.spacing(4),
+      height: '424px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign:'center'
+    },
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
@@ -84,7 +95,8 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
     const classes = useStyles();
     return (  
     
-        <React.Fragment> 
+      <Card className={classes.card} raised={true}>
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <FaceIcon />
         </Avatar>
@@ -182,7 +194,9 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
         </Form>
          )}
           </Formik>
-          </React.Fragment>   
+          </div>
+      </Card>
+
             
             )
 }
