@@ -24,8 +24,10 @@ import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
 
 import Client_info from '../../src/request/1_client_info';
-import Required_profile_info from '../../src/request/2_required_profile_info'
-import Collab_info from '../../src/request/3_collab_info'
+import Required_profile_info from '../../src/request/2_required_profile_info';
+import Collab_info from '../../src/request/3_collab_info';
+import Hiring_info from '../../src/request/4_hiring_info';
+import Additional_info from '../../src/request/5_additional_info';
 
 function Copyright() {
   return (
@@ -142,11 +144,15 @@ export default function SignIn() {
   const form1_isMounted = React.useRef(false)
   const form2_isMounted = React.useRef(false)
   const form3_isMounted = React.useRef(false)
+  const form4_isMounted = React.useRef(false)
+  const form5_isMounted = React.useRef(false)
 
 
   const form_1 = React.useRef(null)
   const form_2 = React.useRef(null)
   const form_3 = React.useRef(null)
+  const form_4 = React.useRef(null)
+  const form_5 = React.useRef(null)
  
 
   const handleNext = () => {
@@ -165,6 +171,14 @@ export default function SignIn() {
     if (form3_isMounted.current) {
       form_3.current.handleSubmit()
     }
+
+    if (form4_isMounted.current) {
+      form_4.current.handleSubmit()
+    }
+
+    if (form5_isMounted.current) {
+      form_5.current.handleSubmit()
+    }
   }
 
 
@@ -182,11 +196,11 @@ export default function SignIn() {
       case 2:
         return <Collab_info formRef={form_3} form3_isMounted={form3_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 3:
-          return <div> ddd </div>;
+          return <Hiring_info formRef={form_4} form4_isMounted={form4_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 4:
-            return <div> eee </div>;
+            return <Additional_info formRef={form_5} form5_isMounted={form5_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 5:
-            return <div> fff </div>;
+            return <div> fff??? </div>;
       default:
         throw new Error('Unknown step');
     }
