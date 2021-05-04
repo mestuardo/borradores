@@ -128,7 +128,6 @@ export default function client_info({formRef:formRef,form2_isMounted:form2_isMou
            formSchema['languages'] = values['languages']
            formSchema['soft_skills'] = values['soft_skills']
            formSchema['maximum_budget'] = values['maximum_budget']
-            alert(JSON.stringify(values, null, 2));
            handleNext()
 
        }}
@@ -363,26 +362,6 @@ export default function client_info({formRef:formRef,form2_isMounted:form2_isMou
 
           />
           </FormControl>
-
-
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recordarme"
-          /> */}
-          {/* <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            // className={classes.submit}
-          >
-            Ingresar N° de cliente
-          </Button>
-
-              <Link href="#" variant="body2">
-                {"¿Necesitas ayuda?"}
-              </Link> */}
-
  
              </Form>
              )}
