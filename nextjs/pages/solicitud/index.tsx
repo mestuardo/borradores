@@ -42,6 +42,9 @@ function Copyright() {
   );
 }
 
+
+
+// Labels títulos y largo de pasos
 const steps = ['Información del cliente', 
 'Informacion del perfil requerido', 
 'Información de contratación del colaborador',
@@ -155,6 +158,7 @@ export default function SignIn() {
   const form_5 = React.useRef(null)
  
 
+
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -189,8 +193,7 @@ export default function SignIn() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
-          
+      return <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 1:
         return <Required_profile_info formRef={form_2} form2_isMounted={form2_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 2:
