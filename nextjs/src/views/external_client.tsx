@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
       display: 'flex',
-      height: 660,
+      height: theme.spacing(78),
       textAlign:'center',
       justifyContent:'center',
       '@media only screen and (max-width: 1279px)': {
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
 
     YgridList: {
       maxWidth: 1100,
-      // maxHeight: 600,
+      maxHeight: theme.spacing(65),
             // Aquí se estiliza la scrollbar
       "&::-webkit-scrollbar": {
         width: 10
