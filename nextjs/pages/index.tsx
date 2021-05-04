@@ -17,7 +17,7 @@ import Appbar from '../src/appbar'
 import Client_number from '../src/sign_in/1_client_number'
 import Set_password from '../src/sign_in/2_set_password'
 import Sign_in from '../src/sign_in/3_sign_in'
-import External_client_view from '../src/views/external_client'
+import Recruiter_view from '../src/views/recruiter_view'
 
 
 function Copyright() {
@@ -91,7 +91,7 @@ export default function SignIn() {
       
 
       {activeStep === steps.length ? (
-        <External_client_view/>
+        <Recruiter_view/>
       ) :  getStepContent(activeStep)}
 
       <Box mt={3}>
