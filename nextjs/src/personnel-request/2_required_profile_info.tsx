@@ -110,7 +110,7 @@ export default function client_info({formRef:formRef,form2_isMounted:form2_isMou
     }, []);
 
     return(<React.Fragment>   
-        <Typography>Información del perfil requerido</Typography>
+
           <Formik
       innerRef={formRef}
        initialValues={formSchema}

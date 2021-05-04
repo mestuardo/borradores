@@ -22,7 +22,7 @@ const SignupSchema = Yup.object().shape({
   createStyles({
     formControl: {
       margin: theme.spacing(1),
-      width: 150,
+      width: 220,
     },
     selectEmpty: {
       marginTop: theme.spacing(3),
@@ -52,7 +52,7 @@ export default function additional_info({formRef:formRef, form5_isMounted:form5_
     }, []);
 
     return(<React.Fragment>
-        <Typography>Información adicional</Typography>
+
         <Formik
         innerRef={formRef}
         initialValues={formSchema}

@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 
-import Appbar from '../../src/appbar'
+import Appbar from '../appbar'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -20,14 +20,16 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 
 import Grid from '@material-ui/core/Grid';
+import GridList from '@material-ui/core/GridList'
+import GridListTile from '@material-ui/core/GridListTile'
 import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
 
-import Client_info from '../../src/request/1_client_info';
-import Required_profile_info from '../../src/request/2_required_profile_info';
-import Collab_info from '../../src/request/3_collab_info';
-import Hiring_info from '../../src/request/4_hiring_info';
-import Additional_info from '../../src/request/5_additional_info';
+import Client_info from './1_client_info';
+import Required_profile_info from './2_required_profile_info';
+import Collab_info from './3_collab_info';
+import Hiring_info from './4_hiring_info';
+import Additional_info from './5_additional_info';
 
 function Copyright() {
   return (
@@ -55,36 +57,7 @@ const steps = ['Información del cliente',
 
 
 const useStyles = makeStyles((theme) => ({
-  left_bar:{
-    margin: theme.spacing(8,0.5),
-    // marginRight: theme.spacing(50),
-    height: theme.spacing(60),
-  },
-  right_bar:{
-    margin: theme.spacing(8,12),
-    padding: theme.spacing(4,1),
-    height: theme.spacing(60),
-    alignItems: 'center',
-    textAlign:'center',
-    '@media only screen and (max-width: 950px)': {
-      margin: theme.spacing(6,1),
 
-      height: theme.spacing(72),
-      
-    },
-    '@media only screen and (max-width: 600px)': {
-      padding: theme.spacing(0),
-
-    },
-  },
-  form: {
-    marginTop: theme.spacing(1),
-    height: theme.spacing(40),
-    '@media only screen and (max-width: 950px)': {
-      height: theme.spacing(51),
-    }
-  }
-  ,
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -92,9 +65,53 @@ const useStyles = makeStyles((theme) => ({
   actionsContainer: {
     marginBottom: theme.spacing(2),
   },
-  resetContainer: {
-    padding: theme.spacing(3),
+
+  Ygrid: {
+    maxWidth: 1100,
+    
+
+
   },
+  form: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+    height: theme.spacing(45),
+
+    
+  },
+  YgridList: {  
+    maxHeight: theme.spacing(42),
+    justifyContent:'center',
+          // Aquí se estiliza la scrollbar
+    "&::-webkit-scrollbar": {
+      width: 10
+          },
+    "&::-webkit-scrollbar-track": {
+      borderRadius: '8px',
+      boxShadow: `inset 0 0 6px rgba(0, 0, 0, 0.3)`,
+    },
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: '8px',
+      backgroundColor: "darkgrey",
+  
+    },
+
+            // Estilo responsivo de YgridList
+    '@media only screen and (max-width: 600px)': {
+      // height: theme.spacing(60),
+
+    },
+    '@media only screen and (max-width: 400px)': {
+      // height: theme.spacing(50),
+
+    },
+
+
+  },
+
+
 }));
 
 
@@ -214,69 +231,36 @@ export default function SignIn() {
     <React.Fragment>
       <CssBaseline />
 
-      <Appbar login={login}/>
     <Grid 
+    className={classes.Ygrid}
     container 
+    direction="column"
+    justify="center"
+    alignItems="center"
     spacing={0}>
-      <Hidden xsDown>
-    <Grid item xs={3}>
-          <Paper className={classes.left_bar}>  <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper></Paper>
-          </Grid>
     
 
-    <Grid item xs={9}>
-          <Paper className={classes.right_bar}>
-          <Typography gutterBottom variant='h5'>Formulario solicitud</Typography>
-          <div className={classes.form}>
-              {activeStep==steps.length ? <div>Finalizado</div>: getStepContent(activeStep) }
-              </div>
-              <div className={classes.actionsContainer}>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Atrás
-                  </Button>
-                  <Button
-                    disabled={activeStep === steps.length-1}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
-                  </Button>
-                </div>
-           
 
-
-
-          </Paper>
-        </Grid>
-       
-        </Hidden>
-
-        <Hidden smUp>
-        <Grid item >
-        
-          <Paper className={classes.right_bar}>
+    
+    <Typography variant='h5'>Formulario solicitud</Typography>
+      
           <Stepper activeStep={activeStep}>
           {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel></StepLabel>
+            <StepLabel><Hidden smDown>{label}</Hidden></StepLabel>
           </Step>
         ))}
           </Stepper>
-          <Typography gutterBottom variant='h5'>Formulario solicitud</Typography>
+          <Hidden mdUp><Typography>{steps[activeStep]}</Typography></Hidden>
+          
           <div className={classes.form}>
+            <GridList 
+            cellHeight={'auto'} 
+            className={classes.YgridList}>
+              <GridListTile style={{width:'80%'}}>
               {activeStep==steps.length ? <div>Finalizado</div>: getStepContent(activeStep) }
+              </GridListTile>
+              </GridList>
               </div>
               <div className={classes.actionsContainer}>
                   <Button
@@ -300,11 +284,7 @@ export default function SignIn() {
 
 
 
-          </Paper>
-        </Grid>
-
-        </Hidden>
-     
+    
 
     </Grid>
     

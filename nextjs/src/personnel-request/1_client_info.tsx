@@ -44,9 +44,7 @@ const SignupSchema = Yup.object().shape({
       margin: theme.spacing(1),
       width: 150,
     },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
+
     labelText:{
       fontSize:'small',
     },
@@ -103,7 +101,7 @@ export default function client_info({formRef:formRef,form1_isMounted:form1_isMou
     }, []);
 
     return(<React.Fragment>   
-        <Typography>Información del cliente</Typography>
+   
           <Formik
       innerRef={formRef}
        initialValues={formSchema}
@@ -141,10 +139,12 @@ export default function client_info({formRef:formRef,form1_isMounted:form1_isMou
           KeyboardButtonProps={{
             'aria-label': 'cambiar fecha',
           }}
+          FormHelperTextProps={{className:classes.helperText}}
         />
                 
         
                 </MuiPickersUtilsProvider>
+         
         </FormControl>
 
         

@@ -101,7 +101,7 @@ export default function collab_info({formRef:formRef,form3_isMounted:form3_isMou
     }, []);
 
     return(<React.Fragment>   
-        <Typography>Información del colaborador</Typography>
+       
           <Formik
           innerRef={formRef}
        initialValues={formSchema}

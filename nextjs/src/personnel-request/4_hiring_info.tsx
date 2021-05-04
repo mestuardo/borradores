@@ -61,7 +61,7 @@ export default function hiring_info({formRef:formRef,form4_isMounted:form4_isMou
     }, []);
 
     return(<React.Fragment>
-        <Typography>Información de contratación del servicio</Typography>
+
         <Formik
         innerRef={formRef}
         initialValues={formSchema}
