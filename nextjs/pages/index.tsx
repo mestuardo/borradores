@@ -16,7 +16,7 @@ import Appbar from '../src/appbar'
 
 import Client_number from '../src/sign_in/1_client_number'
 import Set_password from '../src/sign_in/2_set_password'
-import Sign_in from '../src/sign_in/3_sign_in'
+import Sign_in from '../src/sign_in/3_recruiter_sign_in'
 import Recruiter_view from '../src/views/recruiter_view'
 
 
@@ -41,8 +41,8 @@ var formSchema ={
   new_client_no:'',
   new_password:'',
   validate_new_password:'',
-  client_no:'',
-  client_password:''
+  recruiter_no:'',
+  recruiter_password:''
 }
 
 

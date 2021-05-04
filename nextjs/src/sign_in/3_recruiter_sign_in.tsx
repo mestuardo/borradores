@@ -49,11 +49,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
   
   const SignupSchema = Yup.object().shape({
-    client_no: Yup.string()
-    .required('Ingrese su número de cliente')
+    recruiter_no: Yup.string()
+    .required('Ingrese su número de reclutador')
     .min(5,'El número debe tener 5 dígitos ')
     .max(5,'El número debe tener 5 dígitos '),
-    client_password: Yup.string()
+    recruiter_password: Yup.string()
     .required('Ingrese su contraseña')
   
   });
@@ -104,7 +104,7 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
           Bienvenido a SGT
         </Typography>
         <Typography component="h2" variant="body1">
-          Ingrese su N° de cliente y contraseña
+          Ingrese su N° de reclutador y contraseña
         </Typography>
 
         <Formik
@@ -127,14 +127,14 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
             margin="normal"
             
             fullWidth
-            value= {props.values.client_no}
+            value= {props.values.recruiter_no}
             onChange={props.handleChange}
             // onBlur={props.handleBlur}
-            helperText={props.touched.client_no ? props.errors.client_no : ""}
-            error={props.touched.client_no && Boolean(props.errors.client_no)}
-            id="client_no"
-            label="N° Cliente"
-            name="client_no"
+            helperText={props.touched.recruiter_no ? props.errors.recruiter_no : ""}
+            error={props.touched.recruiter_no && Boolean(props.errors.recruiter_no)}
+            id="recruiter_no"
+            label="N° Reclutador"
+            name="recruiter_no"
             autoFocus
             FormHelperTextProps ={{
               style: {
@@ -153,15 +153,15 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
             margin="normal"
             
             fullWidth
-            value= {props.values.client_password}
+            value= {props.values.recruiter_password}
             onChange={props.handleChange}
             // onBlur={props.handleBlur}
-            helperText={props.touched.client_password ? props.errors.client_password : ""}
-            error={props.touched.client_password && Boolean(props.errors.client_password)}
-            name="client_password"
+            helperText={props.touched.recruiter_password ? props.errors.recruiter_password : ""}
+            error={props.touched.recruiter_password && Boolean(props.errors.recruiter_password)}
+            name="recruiter_password"
             label="Contraseña"
             type="password"
-            id="client_password"
+            id="recruiter_password"
             FormHelperTextProps ={{
               style: {
                 fontSize:'x-small',

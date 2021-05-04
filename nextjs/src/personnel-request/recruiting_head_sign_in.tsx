@@ -130,8 +130,8 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
             value= {props.values.client_no}
             onChange={props.handleChange}
             // onBlur={props.handleBlur}
-            helperText={props.touched.client_no ? props.errors.client_no : ""}
-            error={props.touched.client_no && Boolean(props.errors.client_no)}
+            helperText={props.touched.user_no ? props.errors.user_no : ""}
+            error={props.touched.user_no && Boolean(props.errors.user_no)}
             id="user_no"
             label="N° Usuario"
             name="user_no"
@@ -156,8 +156,8 @@ export default function Sign_in ({formSchema: formSchema, handleNext:handleNext}
             value= {props.values.client_password}
             onChange={props.handleChange}
             // onBlur={props.handleBlur}
-            helperText={props.touched.client_password ? props.errors.client_password : ""}
-            error={props.touched.client_password && Boolean(props.errors.client_password)}
+            helperText={props.touched.user_password ? props.errors.user_password : ""}
+            error={props.touched.user_password && Boolean(props.errors.user_password)}
             name="user_password"
             label="Contraseña"
             type="password"
