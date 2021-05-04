@@ -38,6 +38,7 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { positions } from '@material-ui/system';
 
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
       margin: theme.spacing(6,0),
@@ -118,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
  
 
     },
+
     YgridList: {
       maxWidth: 1100,
       // maxHeight: 600,
@@ -144,7 +146,13 @@ const useStyles = makeStyles((theme) => ({
       },
 
 
-    }
+    },
+    GridListTile:{
+      display:'grid',
+      justifyContent:'center'
+    },
+
+
 
 
 
@@ -160,6 +168,7 @@ const useStyles = makeStyles((theme) => ({
   
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
+
   
     return (
       <div
@@ -170,7 +179,7 @@ const useStyles = makeStyles((theme) => ({
         {...other}
       >
         {value === index && (
-          <Box p={3} style={{textAlign:'-webkit-center'}}>
+          <Box p={3}  >
           {children}
           </Box>
         )}
@@ -307,7 +316,7 @@ const useStyles = makeStyles((theme) => ({
       {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes */}
 
           {sorted_new_requests.slice(0,5).map((new_request) => (
-                    <GridListTile style={{display:'grid'}} key={new_request.id}>
+                    <GridListTile  key={new_request.id} className={classes.GridListTile} >
                 
               {/* Se presenta cada tarjeta de solicitud nueva. Se utiliza slice para no mostrar 
               todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
@@ -338,7 +347,7 @@ const useStyles = makeStyles((theme) => ({
         {/* Es necesario usar GridList y GrisListTile para que exista un overflow de los componentes */}
 
       {SLA_sorted_posted_requests.slice(0,5).map((posted_request) => (
-                <GridListTile style={{display:'grid'}} key={posted_request.id} >
+                <GridListTile  key={posted_request.id} className={classes.GridListTile} >
           
           {/* Se presenta cada tarjeta de solicitudes que están por "vencer". Se utiliza slice para NO mostrar 
           todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
@@ -373,7 +382,7 @@ const useStyles = makeStyles((theme) => ({
         <Typography variant='h6'>Solicitudes pendientes</Typography>
         <GridList cellHeight={'auto'} cols={cols} className={classes.YgridList}>
         {sorted_new_requests.map((new_request) => (
-                    <GridListTile key={new_request.id}>
+                    <GridListTile key={new_request.id} className={classes.GridListTile} >
                 
               {/* Se presenta cada tarjeta de solicitud nueva. Se utiliza slice para no mostrar 
               todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
@@ -417,7 +426,7 @@ const useStyles = makeStyles((theme) => ({
 
         <GridList cellHeight={'auto'} cols={cols} className={classes.YgridList}>
         {shown_posted_requests.map((posted_request) => (
-                <GridListTile key={posted_request.id}>
+                <GridListTile key={posted_request.id} className={classes.GridListTile}>
           
           {/* Se presenta cada tarjeta de solicitudes que están por "vencer". Se utiliza slice para NO mostrar 
           todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
