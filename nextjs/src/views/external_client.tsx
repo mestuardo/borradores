@@ -30,8 +30,13 @@ import Posted_application_card from '../cards/posted_application_card'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import Toolbar from '@material-ui/core/Toolbar';
+
 import {new_requests,posted_requests} from '../views/sample_json'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+
+import { positions } from '@material-ui/system';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,12 +45,29 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
       display: 'flex',
-      height: 620,
+      height: 660,
       textAlign:'center',
+      justifyContent:'center',
+      '@media only screen and (max-width: 1279px)': {
+        margin: theme.spacing(0),
+  
+      },
+      '@media only screen and (max-width: 600px)': {
+        height: theme.spacing(73),
+  
+      },
+
     },
-    tabs: {
+    verticalTabs: {
       borderRight: `1px solid ${theme.palette.divider}`,
+      width: theme.spacing(20)
     },
+    horizontalTabs: {
+      margin: theme.spacing(6,0),
+      marginBottom:0,
+      padding: theme.spacing(0)
+    },
+
 
 
     right_bar:{
@@ -65,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0),
   
       },
+      
 
     },
 
@@ -72,12 +95,15 @@ const useStyles = makeStyles((theme) => ({
     XgridList: {
       flexWrap: 'nowrap',
       maxWidth: 1100,
+      
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: 'translateZ(0)',
 
       // Aquí se estiliza la scrollbar
       "&::-webkit-scrollbar": {
-        height: 10
+        
+        height: 10,
+ 
             },
       "&::-webkit-scrollbar-track": {
         borderRadius: '8px',
@@ -94,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     },
     YgridList: {
       maxWidth: 1100,
-      height: 550,
+      // maxHeight: 600,
             // Aquí se estiliza la scrollbar
       "&::-webkit-scrollbar": {
         width: 10
@@ -108,7 +134,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "darkgrey",
     
       },
-
+      '@media only screen and (max-width: 600px)': {
+        height: theme.spacing(60),
+  
+      },
+      '@media only screen and (max-width: 400px)': {
+        height: theme.spacing(50),
+  
+      },
 
 
     }
@@ -137,8 +170,8 @@ const useStyles = makeStyles((theme) => ({
         {...other}
       >
         {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
+          <Box p={3} style={{textAlign:'-webkit-center'}}>
+          {children}
           </Box>
         )}
       </div>
@@ -172,18 +205,21 @@ const useStyles = makeStyles((theme) => ({
 
     function getCols(screenWidth:any) {
       if (isWidthUp('lg', screenWidth)) {
-        return 4;
+        return {cols: 4,title_font:'h6'};
       }
 
       if (isWidthUp('md', screenWidth)) {
-        return 3;
+        return {cols: 4,title_font:'h6'};
       }
       if (isWidthUp('sm', screenWidth)) {
-        return 2;
+        return {cols: 2,title_font:'body1'};
+      }
+      if (isWidthUp('xs', screenWidth)) {
+        return {cols: 1,title_font:'body1'};
       }
 
 
-      return 1;
+      return {cols: 1,title_font:'body1'};
     }
 
     // Se utiliza .slice para no cambiar el array original y así utilizar filtros
@@ -198,7 +234,8 @@ const useStyles = makeStyles((theme) => ({
 
     const [shown_posted_requests,setShown_posted_requests] = React.useState(SLA_sorted_posted_requests)
 
-    const cols = getCols(props.width);
+    const cols = getCols(props.width).cols;
+    const title_font = getCols(props.width).title_font;
 
 
     // Funciones de los botones de filtro
@@ -224,28 +261,53 @@ const useStyles = makeStyles((theme) => ({
 
   
     return (
+      <React.Fragment>
+            
+      <Hidden lgUp>
+      <Paper>
+      <Tabs
+       orientation="horizontal"
+       variant="scrollable"      
+       value={value}
+       onChange={handleChange}
+       aria-label="Horizontal tabs"
+       centered
+       className={classes.horizontalTabs}
+     >
+       <Tab label="Inicio" {...a11yProps(0)} />
+       <Tab label="Solicitudes pendientes" {...a11yProps(1)} />
+       <Tab label="Solicitudes publicadas" {...a11yProps(2)} />
+
+     </Tabs>
+     </Paper>
+
+     </Hidden>
+
       <div className={classes.root}>
+        
+      <Hidden mdDown> 
         <Tabs
           orientation="vertical"
           variant="scrollable"
           value={value}
           onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
+          aria-label="Vertical tabs"
+          className={classes.verticalTabs}
         >
           <Tab label="Inicio" {...a11yProps(0)} />
           <Tab label="Solicitudes pendientes" {...a11yProps(1)} />
           <Tab label="Solicitudes publicadas" {...a11yProps(2)} />
 
         </Tabs>
+        </Hidden>
         <TabPanel value={value} index={0}>
-        <Typography variant='h6'>Solicitudes pendientes recientes</Typography>
+       <Typography  variant={title_font}>Solicitudes pendientes recientes</Typography>
         <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'}>
                 
       {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes */}
 
           {sorted_new_requests.slice(0,5).map((new_request) => (
-                    <GridListTile key={new_request.id}>
+                    <GridListTile style={{display:'grid'}} key={new_request.id}>
                 
               {/* Se presenta cada tarjeta de solicitud nueva. Se utiliza slice para no mostrar 
               todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
@@ -270,13 +332,13 @@ const useStyles = makeStyles((theme) => ({
         
                     </GridList>
 
-              <Typography variant='h6'>Solicitudes con menor SLA</Typography>
+              <Typography  variant={title_font}>Solicitudes con menor SLA</Typography>
 
-              <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'}>
+              <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'} spacing={0}>
         {/* Es necesario usar GridList y GrisListTile para que exista un overflow de los componentes */}
 
       {SLA_sorted_posted_requests.slice(0,5).map((posted_request) => (
-                <GridListTile key={posted_request.id}>
+                <GridListTile style={{display:'grid'}} key={posted_request.id} >
           
           {/* Se presenta cada tarjeta de solicitudes que están por "vencer". Se utiliza slice para NO mostrar 
           todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
@@ -384,6 +446,8 @@ const useStyles = makeStyles((theme) => ({
         </TabPanel>
 
       </div>
+
+      </React.Fragment>
     );
   }
 
