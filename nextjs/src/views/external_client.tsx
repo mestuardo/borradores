@@ -25,6 +25,8 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 
 const useStyles = makeStyles((theme) => ({
+
+           // Estilo del total del componente
     root: {
       margin: theme.spacing(6,0),
       marginBottom: theme.spacing(0),
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
       height: theme.spacing(78),
       textAlign:'center',
       justifyContent:'center',
+               // Estilo responsivo del total del componente
       '@media only screen and (max-width: 1279px)': {
         margin: theme.spacing(0),
   
@@ -44,11 +47,14 @@ const useStyles = makeStyles((theme) => ({
       },
 
     },
+        // Estilo tabs clickeables verticales
     verticalTabs: {
       borderRight: `1px solid ${theme.palette.divider}`,
       width: theme.spacing(20)
     },
 
+
+    // Estilo tabs clickeables horizontales
     horizontalTabs:{
       display:'flex',
       margin: theme.spacing(6,0),
@@ -62,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent:'center'
     },
 
+      // Estilo grid horizontales (se ven en la tab 1)
 
     XgridList: {
       flexWrap: 'nowrap',
@@ -89,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
  
 
     },
-
+         // Estilo grid verticales (se ven en la tab 2 y 3)
     YgridList: {
       maxWidth: 1100,
       maxHeight: theme.spacing(65),
@@ -106,6 +113,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "darkgrey",
     
       },
+
+              // Estilo responsivo de YgridList
       '@media only screen and (max-width: 600px)': {
         height: theme.spacing(60),
   
@@ -126,12 +135,17 @@ const useStyles = makeStyles((theme) => ({
 
 
   
+  // No estoy muy seguro para qué es esta función pero venía en la documentación de Material-UI
+  // para el cambio de tabs
   interface TabPanelProps {
     children?: React.ReactNode;
     index: any;
     value: any;
   }
   
+
+  
+  // Esta funcioón maneja el cambio de Tabs 
   function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
@@ -152,6 +166,8 @@ const useStyles = makeStyles((theme) => ({
       </div>
     );
   }
+
+  // No estoy muy seguro para qué es esta función pero venía en la documentación de Material-UI
   
   function a11yProps(index: any) {
     return {
@@ -169,11 +185,18 @@ const useStyles = makeStyles((theme) => ({
 
  const ExternalClientView = (props)=> {
     const classes = useStyles();
+
+    // El valor de la tab actual que se está viendo
     const [value, setValue] = React.useState(0);
-  
+
+
+    // Manejador de cambio de la tab que se está viendo  
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
       setValue(newValue);
     };
+    
+     //-----------------------------------------
+
 
         // Esta función se utiliza para determinar el ancho de la pantalla y hacer el número de componentes
     // mostrados por GridList sea acorde al tamaño de la pantalla
@@ -196,24 +219,25 @@ const useStyles = makeStyles((theme) => ({
 
       return {cols: 1,title_font:'body1'};
     }
+    // Con esta constante definimos las columnas a mostrar según ancho de pantalla
+    const cols = getCols(props.width).cols;
 
-    // Se utiliza .slice para no cambiar el array original y así utilizar filtros
+    // Se utiliza .slice para no cambiar el array original y así utilizar filtros en una copia de él
+    // Se hace sort de los request según el atributo requerido de la sample data
     const sorted_new_requests =   new_requests.slice().sort((a:any,b:any)=> b.created_date-a.created_date)
     const SLA_sorted_posted_requests = posted_requests.slice().sort((a:any,b:any)=> a.SLA-b.SLA)
 
-
+    // Orden custom de los elementos del array
     const status_orderLH = ["start","on-going","ready"]
-    // const status_orderHL = ["ready","on-going","start"]
     const Status_sorted_posted_requests = posted_requests.slice().sort((a:any, b:any) => status_orderLH.indexOf(a.status)-status_orderLH.indexOf(b.status))
 
-
+    // State definido para la información que muestran las tarjetas, modificable por filterSLA y filterStatus
     const [shown_posted_requests,setShown_posted_requests] = React.useState(SLA_sorted_posted_requests)
 
-    const cols = getCols(props.width).cols;
-    const title_font = getCols(props.width).title_font;
+      //-----------------------------------------
+    
 
-
-    // Funciones de los botones de filtro
+    // Funciones de los botones de filtro en la tercera tab
 
     const [filter, setFilter] = React.useState<string | null>('SLA');
 
@@ -231,13 +255,17 @@ const useStyles = makeStyles((theme) => ({
 
     }
 
-    // Ordenamos los posted_requests según fecha. Esto lo haría el backend
+    //-----------------------------------------
+
+    // Ordenar la información lo haría el backend
 
 
   
     return (
       <React.Fragment>
             
+
+       {/* // Esta taba se ve solamente cuando la pantalla es de ancho mayor a 'lg' (Ver documentación Hidden) */}
       <Hidden lgUp>
       <Paper className={classes.horizontalTabs}>
       <Tabs
@@ -260,6 +288,7 @@ const useStyles = makeStyles((theme) => ({
 
       <div className={classes.root}>
         
+      {/* // Esta taba se ve solamente cuando la pantalla es de ancho menor a 'md' (Ver documentación Hidden) */}
       <Hidden mdDown> 
         <Tabs
           orientation="vertical"
@@ -275,6 +304,11 @@ const useStyles = makeStyles((theme) => ({
 
         </Tabs>
         </Hidden>
+
+{/* ----------------------------------------------------------------------------------------------------------- */}
+        
+
+         {/* // Aquí comienza el componente de la tab principal*/}
         <TabPanel value={value} index={0}>
         <Hidden mdDown> 
        <Typography  variant={'h6'}>Solicitudes pendientes recientes</Typography>
@@ -284,7 +318,8 @@ const useStyles = makeStyles((theme) => ({
        </Hidden>
         <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'}>
                 
-      {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes */}
+      {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes 
+      GridListTile se le fuerza en los estilos display:grid para que no tenga problemas en el overflow responsivo*/}
 
           {sorted_new_requests.slice(0,5).map((new_request) => (
                     <GridListTile  key={new_request.id} className={classes.GridListTile} >
@@ -311,6 +346,11 @@ const useStyles = makeStyles((theme) => ({
                      
         
                     </GridList>
+
+           
+          {/* Se cambia el tipo de letra según el tamaño de pantalla con Hidden */}
+
+
                     <Hidden mdDown> 
               <Typography  variant={'h6'}>Solicitudes con menor SLA</Typography>
               </Hidden>
@@ -319,14 +359,16 @@ const useStyles = makeStyles((theme) => ({
               </Hidden>
 
               <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'} spacing={0}>
-        {/* Es necesario usar GridList y GrisListTile para que exista un overflow de los componentes */}
+     {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes 
+      GridListTile se le fuerza en los estilos display:grid para que no tenga problemas en el overflow responsivo*/}
+
 
       {SLA_sorted_posted_requests.slice(0,5).map((posted_request) => (
                 <GridListTile  key={posted_request.id} className={classes.GridListTile} >
           
           {/* Se presenta cada tarjeta de solicitudes que están por "vencer". Se utiliza slice para NO mostrar 
           todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
-          solicitudes desde hace X días, por lo que desde el backend se requeriría que los entregaran
+          solicitudes que tienen menor SLA, por lo que desde el backend se requeriría que los entregaran
           en un endpoint ordenado */}
 
               <Posted_application_card 
@@ -353,7 +395,18 @@ const useStyles = makeStyles((theme) => ({
 
             </GridList>
         </TabPanel>
+
+
+
+{/* ----------------------------------------------------------------------------------------------------------- */}
+        
+        
+         {/* // Aquí comienza el componente de la tab n°2*/}
+
         <TabPanel value={value} index={1}>
+
+
+          {/* Se cambia el tipo de letra según el tamaño de pantalla con Hidden */}
         <Hidden mdDown> 
         <Typography variant='h6'>Solicitudes pendientes</Typography>
         </Hidden>
@@ -385,6 +438,12 @@ const useStyles = makeStyles((theme) => ({
           
           </GridList>
         </TabPanel>
+
+
+{/* ----------------------------------------------------------------------------------------------------------- */}
+        
+         {/* // Aquí comienza el componente de la tab n°3*/}
+
         <TabPanel value={value} index={2}>
         <Hidden mdDown> 
         <Typography variant='h6'>Solicitudes publicadas</Typography>
@@ -392,6 +451,9 @@ const useStyles = makeStyles((theme) => ({
         <Hidden lgUp> 
         <Typography variant='body1'><Box fontWeight="fontWeightBold">Solicitudes publicadas</Box></Typography>
         </Hidden>
+
+        
+          {/* Grupo de botones que cambian sus estilo a "apretado" cuando se les hace click */}
 
         <ToggleButtonGroup
               value={filter}
@@ -415,7 +477,7 @@ const useStyles = makeStyles((theme) => ({
           
           {/* Se presenta cada tarjeta de solicitudes que están por "vencer". Se utiliza slice para NO mostrar 
           todos los datos en la vista principal. La idea es que aquí se muestren aquellas 
-          solicitudes desde hace X días, por lo que desde el backend se requeriría que los entregaran
+          solicitudes posteadas según los filtros requeridos, por lo que desde el backend se requeriría que los entregaran
           en un endpoint ordenado */}
 
               <Posted_application_card 
@@ -439,6 +501,10 @@ const useStyles = makeStyles((theme) => ({
           </GridList>
         </TabPanel>
 
+  
+{/* ----------------------------------------------------------------------------------------------------------- */}
+        
+
       </div>
 
       </React.Fragment>
@@ -446,7 +512,7 @@ const useStyles = makeStyles((theme) => ({
   }
 
 
-
+// Se exporta la funcion con withWidth para que funcione la funcion de reconocer el ancho de pantalla
   export default withWidth()(ExternalClientView)
 
 
