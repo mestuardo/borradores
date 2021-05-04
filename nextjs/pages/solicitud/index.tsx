@@ -24,7 +24,10 @@ import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
 
 import Client_info from '../../src/request/1_client_info';
-import Required_profile_info from '../../src/request/2_required_profile_info'
+import Required_profile_info from '../../src/request/2_required_profile_info';
+import Collab_info from '../../src/request/3_collab_info';
+import Hiring_info from '../../src/request/4_hiring_info';
+import Additional_info from '../../src/request/5_additional_info';
 
 function Copyright() {
   return (
@@ -114,7 +117,7 @@ var formSchema ={
   soft_skills:'',
   maximum_budget:'',
   contract_type:'',
-  entry_date: '',
+  entry_date: new Date(),
   job_type:'',
   working_time_schedule:'',
   work_adress:'',
@@ -125,7 +128,6 @@ var formSchema ={
   requires_technical_test:'',
   requires_psy_interview:'',
   requires_references:''
-
 
 }
 
@@ -144,18 +146,18 @@ export default function SignIn() {
   
   const form1_isMounted = React.useRef(false)
   const form2_isMounted = React.useRef(false)
+  const form3_isMounted = React.useRef(false)
+  const form4_isMounted = React.useRef(false)
+  const form5_isMounted = React.useRef(false)
 
 
   const form_1 = React.useRef(null)
   const form_2 = React.useRef(null)
-
+  const form_3 = React.useRef(null)
+  const form_4 = React.useRef(null)
+  const form_5 = React.useRef(null)
  
 
-//   React.useEffect(() => {
-//     return () => {
-//       form_2.current = false
-//     }
-// }, []) 
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -166,10 +168,22 @@ export default function SignIn() {
       form_1.current.handleSubmit()
     }
 
-  if (form2_isMounted.current) {
-    form_2.current.handleSubmit()
+    if (form2_isMounted.current) {
+      form_2.current.handleSubmit()
+    }
+
+    if (form3_isMounted.current) {
+      form_3.current.handleSubmit()
+    }
+
+    if (form4_isMounted.current) {
+      form_4.current.handleSubmit()
+    }
+
+    if (form5_isMounted.current) {
+      form_5.current.handleSubmit()
+    }
   }
-}
 
 
   const handleBack = () => {
@@ -179,18 +193,17 @@ export default function SignIn() {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return (
-        <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>);
+      return <Client_info formRef={form_1} form1_isMounted={form1_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 1:
         return <Required_profile_info formRef={form_2} form2_isMounted={form2_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 2:
-        return <div> ccc </div>;
+        return <Collab_info formRef={form_3} form3_isMounted={form3_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 3:
-          return <div> ddd </div>;
+          return <Hiring_info formRef={form_4} form4_isMounted={form4_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 4:
-            return <div> eee </div>;
+            return <Additional_info formRef={form_5} form5_isMounted={form5_isMounted} formSchema={formSchema} handleNext={handleNext}/>;
       case 5:
-            return <div> fff </div>;
+            return <div> fff??? </div>;
       default:
         throw new Error('Unknown step');
     }
