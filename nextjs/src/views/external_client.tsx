@@ -1,26 +1,15 @@
-  
 import React from 'react';
-
-import CssBaseline from '@material-ui/core/CssBaseline';
-
-import Link from '@material-ui/core/Link';
 
 import Box from '@material-ui/core/Box';
 
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
 
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Paper from '@material-ui/core/Paper';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -30,12 +19,8 @@ import Posted_application_card from '../cards/posted_application_card'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import Toolbar from '@material-ui/core/Toolbar';
-
 import {new_requests,posted_requests} from '../views/sample_json'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
-
-import { positions } from '@material-ui/system';
 
 
 
@@ -63,33 +48,18 @@ const useStyles = makeStyles((theme) => ({
       borderRight: `1px solid ${theme.palette.divider}`,
       width: theme.spacing(20)
     },
-    horizontalTabs: {
+
+    horizontalTabs:{
+      display:'flex',
       margin: theme.spacing(6,0),
       marginBottom:0,
-      padding: theme.spacing(0)
+      justifyContent:'center',
+      padding:0,
+      borderRadius:0
     },
-
-
-
-    right_bar:{
-        margin: theme.spacing(6,1),
-        marginBottom: theme.spacing(0),
-      padding: theme.spacing(1,1),
- 
-      alignItems: 'center',
-      textAlign:'center',
-      '@media only screen and (max-width: 950px)': {
-        margin: theme.spacing(6,1),
-  
-        height: theme.spacing(72),
-        
-      },
-      '@media only screen and (max-width: 600px)': {
-        padding: theme.spacing(0),
-  
-      },
-      
-
+    GridListTile:{
+      display:'grid',
+      justifyContent:'center'
     },
 
 
@@ -147,12 +117,8 @@ const useStyles = makeStyles((theme) => ({
 
 
     },
-    GridListTile:{
-      display:'grid',
-      justifyContent:'center'
-    },
 
-
+  
 
 
 
@@ -273,15 +239,15 @@ const useStyles = makeStyles((theme) => ({
       <React.Fragment>
             
       <Hidden lgUp>
-      <Paper>
+      <Paper className={classes.horizontalTabs}>
       <Tabs
        orientation="horizontal"
        variant="scrollable"      
+       scrollButtons="on"
        value={value}
        onChange={handleChange}
        aria-label="Horizontal tabs"
        centered
-       className={classes.horizontalTabs}
      >
        <Tab label="Inicio" {...a11yProps(0)} />
        <Tab label="Solicitudes pendientes" {...a11yProps(1)} />
@@ -310,7 +276,12 @@ const useStyles = makeStyles((theme) => ({
         </Tabs>
         </Hidden>
         <TabPanel value={value} index={0}>
-       <Typography  variant={title_font}>Solicitudes pendientes recientes</Typography>
+        <Hidden mdDown> 
+       <Typography  variant={'h6'}>Solicitudes pendientes recientes</Typography>
+       </Hidden>
+       <Hidden lgUp> 
+       <Typography  variant={'body1'}><Box fontWeight="fontWeightBold">Solicitudes pendientes recientes</Box></Typography>
+       </Hidden>
         <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'}>
                 
       {/* Es necesario usar GridList y GrisListTile para que exista un overflow horizontal de los componentes */}
@@ -340,8 +311,12 @@ const useStyles = makeStyles((theme) => ({
                      
         
                     </GridList>
-
-              <Typography  variant={title_font}>Solicitudes con menor SLA</Typography>
+                    <Hidden mdDown> 
+              <Typography  variant={'h6'}>Solicitudes con menor SLA</Typography>
+              </Hidden>
+              <Hidden lgUp> 
+              <Typography  variant={'body1'}><Box fontWeight="fontWeightBold">Solicitudes con menor SLA</Box></Typography>
+              </Hidden>
 
               <GridList className={classes.XgridList} cols={cols} cellHeight={'auto'} spacing={0}>
         {/* Es necesario usar GridList y GrisListTile para que exista un overflow de los componentes */}
@@ -379,7 +354,12 @@ const useStyles = makeStyles((theme) => ({
             </GridList>
         </TabPanel>
         <TabPanel value={value} index={1}>
+        <Hidden mdDown> 
         <Typography variant='h6'>Solicitudes pendientes</Typography>
+        </Hidden>
+        <Hidden lgUp> 
+        <Typography variant='body1'><Box fontWeight="fontWeightBold">Solicitudes pendientes</Box></Typography>
+        </Hidden>
         <GridList cellHeight={'auto'} cols={cols} className={classes.YgridList}>
         {sorted_new_requests.map((new_request) => (
                     <GridListTile key={new_request.id} className={classes.GridListTile} >
@@ -406,7 +386,12 @@ const useStyles = makeStyles((theme) => ({
           </GridList>
         </TabPanel>
         <TabPanel value={value} index={2}>
+        <Hidden mdDown> 
         <Typography variant='h6'>Solicitudes publicadas</Typography>
+        </Hidden>
+        <Hidden lgUp> 
+        <Typography variant='body1'><Box fontWeight="fontWeightBold">Solicitudes publicadas</Box></Typography>
+        </Hidden>
 
         <ToggleButtonGroup
               value={filter}
